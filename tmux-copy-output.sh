@@ -16,7 +16,7 @@ launcher_cmd() {
 }
 
 launcher=$1
-content="$(tmux capture-pane -p)"
+content="$(tmux capture-pane -pS -32768)"
 # Get PS1 prompt
 ps1="$(echo "$content" |
         grep "\S" |
