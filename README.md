@@ -7,8 +7,9 @@
 
 
 ## Dependencies
-Make sure you have:
-- [`fzf`](https://github.com/junegunn/fzf)
+- Launcher: Make sure you have a launcher or finder to be able to select:
+  - [fzf](https://github.com/junegunn/fzf) [Recommended]
+  - [dmenu](https://github.com/junegunn/fzf)
 - [`xclip`](https://github.com/astrand/xclip)
 
 ## Install
@@ -27,10 +28,12 @@ Clone this repo somewhere and source `tmux-copy-output.tmux` at the config file.
 
 ## Usage
 
-The default key-binding is `g`(of course prefix hit is needed), it can be modified by setting value to `@tmux-copy-output` at the tmux config like this:
+The default key-binding is `g`(of course prefix hit is needed), it can be modified by setting value to `@tco-key` at tmux config file.
+There is also an option to set which launcher to use. By default it is `fzf-tmux`, you can use `dmenu` or any custom command.
 
 ``` tmux
-set -g @tmux-copy-output 'x'
+set -g @tco-key 'k'
+set -g @tco-launcher 'dmenu -c -l 30 -bw 2'
 ```
 ## Acknowledgements
 Copy script hugely inspired on:
