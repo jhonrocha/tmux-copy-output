@@ -4,13 +4,18 @@
 # fzf-tmux and xclip required for this script.
 # By Jaywalker, Luke and Jhon
 
-fzf_cmd() {
-    fzf-tmux -d 35% --multi --exit-0 --cycle --reverse --bind='ctrl-r:toggle-all' --bind='ctrl-s:toggle-sort' --no-preview
+launcher_cmd() {
+  if [ "$1" = "fzf-tmux" ]; then
+    fzf-tmux -d 35% --multi --exit-0 --cycle --reverse --bind='ctrl-r:toggle-all' --bind='ctrl-s:toggle-sort' --no-preview --header="Copy which command's output?"
+  elif [ "$1" = "dmenu" ]; then
+    dmenu -p "Copy which command's output?" -i -l 10 
+  else
+    # Simply use the command
+    $1
+  fi
 }
 
-tmpfile=$(mktemp /tmp/st-cmd-output.XXXXXX)
-trap 'rm "$tmpfile"' 0 1 15
-tmux capture-pane -p > $tmpfile
+launcher=$1
 content="$(tmux capture-pane -p)"
 # Get PS1 prompt
 ps1="$(echo "$content" |
@@ -23,7 +28,7 @@ chosen="$(echo "$content" |
           grep -F "$ps1" |
           sed '$ d' |
           tac |
-          fzf_cmd |
+          launcher_cmd "$launcher" |
           sed 's/[^^]/[&]/g; s/\^/\\^/g')"
 eps1="$(echo "$ps1" | sed 's/[^^]/[&]/g; s/\^/\\^/g')"
 

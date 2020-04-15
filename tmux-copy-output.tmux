@@ -14,6 +14,8 @@ tmux_get() {
     [ -n "$value" ] && echo "$value" || echo "$2"
 }
 
-key="$(tmux_get '@tmux-copy-output' 'g')"
+key="$(tmux_get '@tco-key' 'g')"
+launcher="$(tmux_get '@tco-launcher' 'fzf-tmux')"
 
-tmux bind-key "$key" run -b "$CURRENT_DIR/tmux-copy-output.sh";
+tmux bind-key "$key" run -b "$CURRENT_DIR/tmux-copy-output.sh \"$launcher\"";
+
