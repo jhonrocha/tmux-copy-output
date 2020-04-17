@@ -31,9 +31,12 @@ Clone this repo somewhere and source `tmux-copy-output.tmux` at the config file.
 The default key-binding is `g`(of course prefix hit is needed), it can be modified by setting value to `@tco-key` at tmux config file.
 There is also an option to set which launcher to use. By default it is `fzf-tmux`, you can use `dmenu` or any custom command.
 
+The default copy to clipboard command is `xclip` for Linux systems. It's possible to override the command with `@tco-copy`.
+
 ``` tmux
 set -g @tco-key 'k'
 set -g @tco-launcher 'dmenu -c -l 30 -bw 2'
+set -g @tco-copy 'pbcopy'
 ```
 ## Acknowledgements
 Copy script hugely inspired on:
