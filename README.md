@@ -33,11 +33,15 @@ There is also an option to set which launcher to use. By default it is `fzf-tmux
 
 The default copy to clipboard command is `xclip` for Linux systems. It's possible to override the command with `@tco-copy`.
 
+There is also a quick key to copy the last command executed on the pane, being `G` by default. It is possible to override it with `@tco-quick-key`.
+
 ``` tmux
 set -g @tco-key 'k'
 set -g @tco-launcher 'dmenu -c -l 30 -bw 2'
 set -g @tco-copy 'pbcopy'
+set -g @tco-quick-key 'K'
 ```
+
 ## Acknowledgements
 Copy script hugely inspired on:
 - [tmux-fzf-url](https://github.com/wfxr/tmux-fzf-url) plugin
