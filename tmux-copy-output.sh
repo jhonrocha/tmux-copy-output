@@ -16,6 +16,7 @@ launcher_cmd() {
 }
 
 launcher=$1
+copy=$2
 content="$(tmux capture-pane -pS -32768)"
 # Get PS1 prompt
 ps1="$(echo "$content" |
@@ -34,4 +35,4 @@ eps1="$(echo "$ps1" | sed 's/[^^]/[&]/g; s/\^/\\^/g')"
 
 echo "$content" |
   awk "/^$chosen$/{p=1;print;next} p&&/$eps1/{p=0};p" |
-  xclip -selection clipboard
+  $copy
