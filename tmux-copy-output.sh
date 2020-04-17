@@ -5,7 +5,9 @@
 # By Jaywalker, Luke and Jhon
 
 launcher_cmd() {
-  if [ "$1" = "fzf-tmux" ]; then
+  if [ "$2" = "quick" ]; then
+    head -n 1
+  elif [ "$1" = "fzf-tmux" ]; then
     fzf-tmux -d 35% --multi --exit-0 --cycle --reverse --bind='ctrl-r:toggle-all' --bind='ctrl-s:toggle-sort' --no-preview --header="Copy which command's output?"
   elif [ "$1" = "dmenu" ]; then
     dmenu -p "Copy which command's output?" -i -l 10 
@@ -17,7 +19,11 @@ launcher_cmd() {
 
 launcher=$1
 copy=$2
+quick_key=$3
+
+# Read pane
 content="$(tmux capture-pane -pS -32768)"
+
 # Get PS1 prompt
 ps1="$(echo "$content" |
         grep "\S" |
@@ -29,10 +35,11 @@ chosen="$(echo "$content" |
           grep -F "$ps1" |
           sed '$ d' |
           tac |
-          launcher_cmd "$launcher" |
+          launcher_cmd "$launcher" "$quick_key" |
           sed 's/[^^]/[&]/g; s/\^/\\^/g')"
 eps1="$(echo "$ps1" | sed 's/[^^]/[&]/g; s/\^/\\^/g')"
 
 echo "$content" |
   awk "/^$chosen$/{p=1;print;next} p&&/$eps1/{p=0};p" |
   $copy
+

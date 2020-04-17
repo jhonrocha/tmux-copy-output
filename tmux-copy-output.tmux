@@ -15,8 +15,10 @@ tmux_get() {
 }
 
 key="$(tmux_get '@tco-key' 'g')"
+quick_key="$(tmux_get '@tco-quick-key' 'G')"
 launcher="$(tmux_get '@tco-launcher' 'fzf-tmux')"
 copy="$(tmux_get '@tco-copy' 'xclip -selection clipboard')"
 
-tmux bind-key "$key" run -b "$CURRENT_DIR/tmux-copy-output.sh \"$launcher\" \"$copy\"";
+tmux bind-key "$key" run -b "$CURRENT_DIR/tmux-copy-output.sh \"$launcher\" \"$copy\" default";
+tmux bind-key "$quick_key" run -b "$CURRENT_DIR/tmux-copy-output.sh \"$launcher\" \"$copy\" quick";
 
