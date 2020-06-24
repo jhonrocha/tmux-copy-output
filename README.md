@@ -1,7 +1,7 @@
 # tmux-copy-output
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://wfxr.mit-license.org/2018)
-![version 0.0.2](https://img.shields.io/badge/version-0.0.1-red.svg)
+![version 0.0.2](https://img.shields.io/badge/version-0.0.2-red.svg)
 
 `tmux-copy-output` is a tmux plugin for copying command's outputs inside a pane.
 
