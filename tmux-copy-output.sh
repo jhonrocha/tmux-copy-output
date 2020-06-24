@@ -30,16 +30,20 @@ ps1="$(echo "$content" |
         tail -n 1 |
         sed 's/^\s*//' |
         cut -d' ' -f1)"
+
+# Stop Point
+eps1="$(echo "$ps1" | sed 's/[^^]/[&]/g; s/\^/\\^/g')"
+
 # Choose
 chosen="$(echo "$content" |
-          grep -F "$ps1" |
+          grep -Fn "$ps1" |
           sed '$ d' |
           tac |
           launcher_cmd "$launcher" "$quick_key" |
-          sed 's/[^^]/[&]/g; s/\^/\\^/g')"
-eps1="$(echo "$ps1" | sed 's/[^^]/[&]/g; s/\^/\\^/g')"
+          cut -d':' -f1)"
 
+# Do the copy
 echo "$content" |
-  awk "/^$chosen$/{p=1;print;next} p&&/$eps1/{p=0};p" |
+  awk "NR==$chosen{flag=1;print;next} flag&&/$eps1/{exit} flag" |
   $copy
 

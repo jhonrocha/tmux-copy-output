@@ -7,6 +7,7 @@
 
 
 ## Dependencies
+
 - Launcher: Make sure you have a launcher or finder to be able to select:
   - [fzf](https://github.com/junegunn/fzf) [Recommended]
   - [dmenu](https://github.com/junegunn/fzf)
@@ -44,9 +45,15 @@ set -g @tco-quick-key 'K'
 
 ## Acknowledgements
 Copy script hugely inspired on:
+
 - [tmux-fzf-url](https://github.com/wfxr/tmux-fzf-url) plugin
 - [`Luke Smith`](https://lukesmith.xyz/) script to [copy from external pipe on st](https://github.com/LukeSmithxyz/st/blob/master/st-copyout)
 
+## Contibutors
+
+- [Thales Mello](https://github.com/thalesmello)
+- [Jhon Rocha](https://github.com/jhonrocha)
+
 ## License
 
-[MIT](https://github.com/jhonrocha/tmux-copy-output/blob/master/README.md)
+[MIT](https://github.com/jhonrocha/tmux-copy-output/blob/master/LICENSE)
